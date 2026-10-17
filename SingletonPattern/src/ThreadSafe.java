@@ -1,0 +1,27 @@
+class JudgeAnalytics {
+    private static volatile JudgeAnalytics judgeAnalytics;
+
+    private JudgeAnalytics() {
+    }
+
+    public static JudgeAnalytics getInstance() {
+        if (judgeAnalytics == null) {
+            synchronized (JudgeAnalytics.class) {
+                if (judgeAnalytics == null) {
+                    judgeAnalytics = new JudgeAnalytics();
+                }
+            }
+        }
+        return judgeAnalytics;
+    }
+}
+
+public class ThreadSafe {
+    public static void main(String[] args) {
+        JudgeAnalytics judgeAnalytics = JudgeAnalytics.getInstance();
+        JudgeAnalytics judgeAnalytics2 = JudgeAnalytics.getInstance();
+
+        System.out.println(judgeAnalytics);
+        System.out.println(judgeAnalytics2);
+    }
+}
